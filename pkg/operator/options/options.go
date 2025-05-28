@@ -53,7 +53,7 @@ func (o *Options) AddFlags(fs *coreoptions.FlagSet) {
 	fs.BoolVar(&o.Interruption, "interruption", env.WithDefaultBool("INTERRUPTION", true), "Enable interruption handling.")
 	fs.BoolVar(&o.TelemetryShare, "telemetry-share", env.WithDefaultBool("TELEMETRY_SHARE", true), "Enable telemetry sharing.")
 	fs.IntVar(&o.APGCreationQPS, "apg-qps", int(env.WithDefaultInt64("APG_CREATION_QPS", 100)), "The QPS limit for creating AutoProvisionGroup.")
-	fs.StringVar(&o.ClusterType, "cluster-type", env.WithDefaultString("CLUSTER_TYPE", "ACKManaged"), "Type of cluster, which specifies the method to generate userdata. The default is ACKManaged, with an option for Custom configuration.")
+	fs.StringVar(&o.ClusterType, "cluster-type", env.WithDefaultString("CLUSTER_TYPE", "ACKManaged"), "Type of cluster, which specifies the method to generate userdata. The default is ACKManaged, with an option for Custom configuration. If your cluster-type is not default or ACKManaged, you need to add taint(karpenter.sh/unregistered:NoExecute) before the node is ready")
 }
 
 func (o *Options) Parse(fs *coreoptions.FlagSet, args ...string) error {
